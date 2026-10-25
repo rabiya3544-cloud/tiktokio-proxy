@@ -6,10 +6,13 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  // Vercel auto-parses JSON bodies, but be defensive:
   const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
   const vid = body.vid;
-  if (!vid) return res.status(400).json({ error: 'vid is required' });
+
+  // vid is a TikTok URL, not an ID
+  if (typeof vid !== 'string' || !/^https?:\/\//i.test(vid.trim())) {
+    return res.status(400).json({ error: 'vid must be a TikTok URL' });
+  }
 
   try {
     const upstream = await fetch('https://tiktokio.com/api/v1/tk/html', {
@@ -21,7 +24,7 @@ export default async function handler(req, res) {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
                       '(KHTML, like Gecko) Chrome/124.0 Safari/537.36',
       },
-      body: JSON.stringify({ vid, prefix: 'tiktokio.com' }),
+      body: JSON.stringify({ vid: vid.trim(), prefix: 'tiktokio.com' }),
     });
 
     const text = await upstream.text();
