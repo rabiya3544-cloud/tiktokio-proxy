@@ -4,135 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title></title>
-<link href="style.css" rel="stylesheet">
-<style>
-.media-download-btn{
-color: white;
-}
-.media-download-btn.hd {
-background-color: rgb(46, 138, 99);
-}
-.media-download-btn.sd{
-background-color: rgb(37,99,235);
-}
-.media-download-btn.watermark {
-background-color: rgb(75, 85, 99);
-}
-.media-download-btn.mp3, .media-download-btn.audio {
-background-color: rgb(147, 51, 234);
-}
-.media-download-btn.new {
-background-color: rgb(22, 29, 38);
-}
-
-/* ── Download button variants ────────────────────────────── */
-/* Idle: dim background + bright text + bright border          */
-/* Hover: solid bright background + near-black text            */
-
-.media-download-btn.hd {
-  background: var(--accent-dim);        /* #234a3b */
-  color: var(--accent);                 /* #3ddc97 */
-  border-color: var(--accent);
-}
-.media-download-btn.hd:hover {
-  background: var(--accent);
-  color: #06120d;
-}
-
-.media-download-btn.sd {
-  background: #1e3a52;                  /* dim sky */
-  color: #7dd3fc;                       /* bright sky */
-  border-color: #7dd3fc;
-}
-.media-download-btn.sd:hover {
-  background: #7dd3fc;
-  color: #041018;
-}
-
-.media-download-btn.watermark {
-  background: #4a3a12;                  /* dim amber */
-  color: #fbbf24;                       /* bright amber */
-  border-color: #fbbf24;
-}
-.media-download-btn.watermark:hover {
-  background: #fbbf24;
-  color: #1a1305;
-}
-
-.media-download-btn.audio {
-  background: #2f2349;                  /* dim violet */
-  color: #a78bfa;                       /* bright violet */
-  border-color: #a78bfa;
-}
-.media-download-btn.audio:hover {
-  background: #a78bfa;
-  color: #100a1c;
-}
-
-.media-download-btn.new {
-  background: #2a3238;                  /* dim slate */
-  color: #94a3b8;                       /* bright slate */
-  border-color: #94a3b8;
-}
-.media-download-btn.new:hover {
-  background: #94a3b8;
-  color: #0b0f12;
-}
-</style>
-<style>
-#tt-progress {
-  margin: 0 0 16px;
-  font-family: var(--mono);
-  font-size: 12px;
-  max-width: 100%;
-  width: 100%;
-}
-#tt-progress .tt-bar {
-  height: 6px;
-  background: #0d1412;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  overflow: hidden;
-}
-#tt-progress .tt-fill {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #4ee6a8, var(--accent));
-  box-shadow: 0 0 10px -2px var(--accent);
-  transition: width .35s ease;
-}
-#tt-progress .tt-fill.error {
-  background: linear-gradient(90deg, #ff8078, var(--error));
-  box-shadow: 0 0 10px -2px var(--error);
-}
-#tt-progress .tt-label {
-  margin-top: 8px;
-  color: var(--muted);
-  letter-spacing: 0.02em;
-  min-height: 1.2em;
-}
-#tt-progress .tt-label.is-error {
-  color: var(--error);
-}
-#tt-progress .tt-label.is-success {
-  color: var(--accent);
-}
-.flex-1{
-flex:1;
-}
-</style>
+<link href="tktokio.css" rel="stylesheet">
 </head>
-
 <body>
 <div class="wrap">
 <header>
 <div class="left">
-<h1>Endpoint tester</h1>
-<p class="eyebrow">btch-downloader-api</p>
+<h1>JFR Video Downloader</h1>
+<p class="eyebrow">A hight quality video downloader</p>
 </div>
 <div class="status-row right">
 <span class="dot" id="statusDot"></span>
-<span id="statusText">checking server…</span>
+<span id="statusText">checking…</span>
 </div>
 </header>
 <main>
@@ -143,16 +26,42 @@ flex:1;
 </div>
 <button id="fetchBtn">Fetch</button>
 
-<div id="tt-progress" hidden>
-  <div class="tt-bar"><div class="tt-fill"></div></div>
-  <div class="tt-label">Starting…</div>
+<div id="tt-progress">
+<div class="tt-bar"><div class="tt-fill"></div>
+</div>
+<div class="tt-label">Starting…</div>
 </div>
 </div>
 <div class="panel media">
+
 <div class="result-header">
-<h2>Media</h2>
-<span class="badge ok" id="resultBadge" style="display: inline-block;">200 success</span>
+<div class="avatar">
+<img src="">
 </div>
+<div class="handle">
+<div class="nickname">Jafer</div>
+<div class="uniqueid">@jafernegery</div>
+</div>
+<div class="author-stats">
+<div class="stats">
+<div class="label">Following</div>
+<div class="value">923</div>
+</div>
+<div class="stats">
+<div class="label">Follower</div>
+<div class="value">11.2K</div>
+</div>
+<div class="stats">
+<div class="label">Likes</div>
+<div class="value">110.2K</div>
+</div>
+<div class="stats">
+<div class="label">Videos</div>
+<div class="value">1.2K</div>
+</div>
+</div>
+</div>
+
 <div id="mediaCards">
 <div id="tt-result" class="media-grid">
 <div class="media-card">
@@ -174,256 +83,40 @@ flex:1;
 </div>
 </div>
 </div>
+
+<div class="result-footer">
+<div class="video-stats">
+<div class="stats">
+  <div class="label">Views</div>
+  <div class="value">923</div>
+</div>
+<div class="stats">
+  <div class="label">Likes</div>
+  <div class="value">11.2K</div>
+</div>
+<div class="stats">
+  <div class="label">Comments</div>
+  <div class="value">110.2K</div>
+</div>
+<div class="stats">
+  <div class="label">Shares</div>
+  <div class="value">1.2K</div>
+</div>
+<div class="stats">
+<div class="label">Favorite</div>
+<div class="value">23</div>
+</div>
+</div>
+</div>
+
 </div>
 </main>
-<footer>Local dev tester · calls <a href="/api/platforms" target="_blank">/api/platforms</a></footer>
+<footer>Powered by: <a href="" target="_blank">Jafer F.</a></footer>
 </div>
 
-<script>
-const VERCEL_API = 'https://jfr-tiktokio-proxy.vercel.app';
-// jfrtok + size
-const VERCEL_META = 'https://jfrtik.vercel.app';
-// scrape
-const WORKER_DL = 'https://jfr-tiktokio-proxy.rabiya3544.workers.dev/api/download';
-
-const box = document.getElementById('tt-progress');
-const fill = box.querySelector('.tt-fill');
-const label = box.querySelector('.tt-label');
-const result = document.getElementById('tt-result');
-const inputEl = document.getElementById("input");
-const fetchBtn = document.getElementById("fetchBtn");
-
-function resetProgress({ hide = true } = {}) {
-  // progress bar
-  fill.classList.remove('error');
-  fill.style.width = '0%';
-  
-  // label
-  label.textContent = 'Starting…';
-  
-  // result area
-  result.replaceChildren();
-  
-  // visibility
-  box.hidden = hide;
-}
-
-async function tiktokWithProgress(vid, onProgress) {
-  const res = await fetch(`${VERCEL_API}/api/jfrtok`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ vid }),
-  });
-
-  if (!res.body || !res.ok) {
-    const text = await res.text();
-    throw new Error(`Proxy ${res.status}: ${text}`);
-  }
-
-  const reader  = res.body.getReader();
-  const decoder = new TextDecoder();
-  let buf = '', data = null, error = null;
-
-  while (true) {
-    const { value, done } = await reader.read();
-    if (done) break;
-    buf += decoder.decode(value, { stream: true });
-
-    let nl;
-    while ((nl = buf.indexOf('\n')) >= 0) {
-      const line = buf.slice(0, nl).trim();
-      buf = buf.slice(nl + 1);
-      if (!line) continue;
-      const evt = JSON.parse(line);
-      onProgress?.(evt);
-      if (evt.stage === 'done')  data  = evt.data;
-      if (evt.stage === 'error') error = evt.msg;
-    }
-  }
-
-  const tail = buf.trim();
-  if (tail) {
-    const evt = JSON.parse(tail);
-    onProgress?.(evt);
-    if (evt.stage === 'done')  data  = evt.data;
-    if (evt.stage === 'error') error = evt.msg;
-  }
-
-  if (error) throw new Error(error);
-  if (!data?.html) throw new Error('No HTML in response');
-
-  const doc = new DOMParser().parseFromString(data.html, 'text/html');
-  const el  = doc.querySelector('.tk-result-content');
-  if (!el) throw new Error('tk-result-content not found');
-  return el;
-}
-
-// ← this was missing: el → plain object
-function parseTiktokResult(el) {
-  const pick = (cls) => el.querySelector(`.download-links a.${cls}`)?.href || null;
-  return {
-    cover:     el.querySelector('.video-info img')?.src || null,
-    title:     el.querySelector('.video-info h3')?.textContent.trim() || null,
-    sd:        pick('download-btn-blue'),
-    hd:        pick('download-btn-green'),
-    watermark: pick('download-btn-gray'),
-    audio:     pick('download-btn-purple'),
-  };
-}
-
-function makeFilename(meta, key) {
-  const ext = key === 'audio' ? 'mp3' : 'mp4';
-  if (!meta?.uniqueId || !meta?.videoId) return `tiktok_${key}.${ext}`;
-  
-  // strip anything OS-hostile; TikTok usernames/ids are usually safe already
-  const safe = (s) => String(s).replace(/[^a-zA-Z0-9._-]/g, '_');
-  return `${safe(meta.uniqueId)}_${safe(meta.videoId)}_${key}.${ext}`;
-}
-
-function renderTiktok(data) {
-  const card = document.createElement('div');
-  card.className = 'media-card';
-  
-  const preview = document.createElement('div');
-  preview.className = 'media-preview';
-  card.append(preview);
-  
-  const img = document.createElement('img');
-  img.src = data.cover || '';
-  img.alt = data.title || '';
-  img.loading = 'lazy';
-  preview.append(img);
-  
-  const meta = document.createElement('div');
-  meta.className = 'media-meta';
-  preview.append(meta);
-  
-  const cardBody = document.createElement('div');
-  cardBody.className = 'media-card-body';
-  card.append(cardBody);
-  
-  if (data.title) {
-    const cardTitle = document.createElement('div');
-    cardTitle.className = 'media-card-title';
-    cardTitle.textContent = data.title;
-    cardBody.append(cardTitle);
-  }
-  
-  const cardStatus = document.createElement('div');
-  cardStatus.className = 'media-download-status';
-  cardStatus.style.display = 'none';
-  cardBody.append(cardStatus);
-  
-  const labels = {
-    hd: 'HD',
-    sd: 'SD',
-    watermark: 'Watermark',
-    audio: 'MP3',
-  };
-  
-  for (const [key, label] of Object.entries(labels)) {
-  if (!data[key]) continue;
-  
-  const info = data.sizes?.[key];
-  const size = info?.human ? ` (${info.human})` : '';
-  const fname = makeFilename(data.meta, key);
-  
-  const a = document.createElement('a');
-  a.className = 'media-download-btn ' + key;
-  a.href = `${WORKER_DL}?url=${encodeURIComponent(data[key])}&filename=${encodeURIComponent(fname)}`;
-  a.download = fname;
-  a.textContent = `${label}${size}`;
-  if (info?.bytes) a.title = `${info.bytes.toLocaleString()} bytes`;
-  meta.append(a);
-}
-  
-const span = document.createElement('span');
-span.className = 'flex-1';
-meta.append(span);
-  const button = document.createElement('button');
-  button.className = 'media-download-btn new';
-  button.type = "button";
-  button.textContent = "New";
-  meta.append(button);
-  
-  return card;
-}
-
-async function getSizes(urls, proxy = `${VERCEL_API}/api/size`) {
-  const res = await fetch(proxy, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ urls }),
-  });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || `Sizes ${res.status}`);
-  return data;
-}
-
-async function fetchScrape(url) {
-  const res = await fetch(`${VERCEL_META}/api/scrape?url=${encodeURIComponent(url)}`);
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
-  return data;
-}
-
-async function load(vid) {
-  resetProgress({ hide: false });
-
-  const t0 = performance.now();
-  try {
-    // ── 1. TikTok data (stream) ──────────────────────────
-    const el = await tiktokWithProgress(vid, (evt) => {
-      fill.style.width = evt.pct + '%';
-      const secs = ((performance.now() - t0) / 1000).toFixed(1);
-      label.textContent = `${evt.msg} (${secs}s)`;
-    });
-
-    const data = parseTiktokResult(el);
-
-    // ── 2. File sizes ────────────────────────────────────
-    fill.style.width = '90%';
-    label.textContent = 'Fetching file sizes…';
-    try {
-      data.sizes = await getSizes({
-        hd: data.hd,
-        sd: data.sd,
-        watermark: data.watermark,
-        audio: data.audio,
-      });
-    } catch (e) { console.warn('sizes failed:', e); }
-
-    // ── 3. Metadata ──────────────────────────────────────
-    fill.style.width = '95%';
-    label.textContent = 'Fetching metadata…';
-    try {
-      const scrape = await fetchScrape(vid);
-      data.meta = {
-        uniqueId: scrape.author?.uniqueId ?? null,
-        videoId:  scrape.video?.[0]?.id ?? null,
-      };
-    } catch (e) { console.warn('meta failed:', e); data.meta = null; }
-
-    fill.style.width = '100%';
-    label.textContent = `Done in ${((performance.now() - t0) / 1000).toFixed(1)}s`;
-    result.append(renderTiktok(data));
-  } catch (e) {
-    fill.classList.add('error');
-    fill.style.width = '100%';
-    label.textContent = 'Error: ' + e.message;
-  } finally {
-    setTimeout(() => { box.hidden = true; }, 2000);
-  }
-}
-
-function runFetch() {
-const value = inputEl.value.trim();
-load(value);
-}
-
-fetchBtn.addEventListener("click", runFetch);
-
-resetProgress({hide: false});
-</script>
+<script src="tktokio.js"></script>
+<!--
+<script type="module" src="app.js"></script>
+-->
 </body>
 </html>
