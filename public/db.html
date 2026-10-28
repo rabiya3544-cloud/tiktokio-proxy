@@ -164,7 +164,9 @@ async function persist(record) {
   return res.json();
 }
 
+
 async function load(vid) {
+  vid = vid.replace(/\/+$/, '');
   resetProgress();
   fetchBtn.disabled = true;
   preEl.textContent = '';
@@ -178,7 +180,6 @@ async function load(vid) {
         prgLbl.textContent = `${evt.msg} (${secs}s)`;
       },
     });
-
     const record = transformTiktok(data);
     preEl.textContent = JSON.stringify(record, null, 2);
 
@@ -193,6 +194,17 @@ async function load(vid) {
   } finally {
     fetchBtn.disabled = false;
   }
+}
+
+async function query(sql) {
+  const res = await fetch(`${client.endpoints.main}/api/query`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sql }),
+  });
+  const j = await res.json();
+  if (!res.ok) throw new Error(j.error || `HTTP ${res.status}`);
+  return j;
 }
 
 function transformTiktok(data) {
@@ -281,6 +293,9 @@ copyBtn.addEventListener('click', async () => {
     copyBtn.classList.remove('copied');
   }, 1400);
 });
+
+window.client = client;
+window.query = query;
 
 (async () => {
   const ok = await client.checkHealth();
