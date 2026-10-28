@@ -2,7 +2,8 @@
   "name": "jfr-tiktokio-proxy",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "dependencies": {
-    "@tursodatabase/serverless": "^1.2.3"
+    "@libsql/client": "^0.14.0"
   }
 }
