@@ -1,9 +1,7 @@
-const https = require('https');
-const { URL } = require('url');
-const zlib = require('zlib');
-const { StringDecoder } = require('string_decoder');
+import https from 'node:https';
+import zlib from 'node:zlib';
+import { StringDecoder } from 'node:string_decoder';
 
-// Helper: HTTPS GET with redirects + decompression
 function fetchUrl(urlStr, redirects = 0) {
   return new Promise((resolve, reject) => {
     if (redirects > 10) {
@@ -66,7 +64,6 @@ function fetchUrl(urlStr, redirects = 0) {
   });
 }
 
-// Extract both author and video data from a single TikTok video page
 function extractFromHtml(html) {
   const patterns = [
     {
@@ -97,7 +94,6 @@ function extractFromHtml(html) {
       const item = pattern.parser(json);
       if (!item) continue;
 
-      // ---------- Author ----------
       const a = item.author || {};
       const aStats = item.authorStats || {};
       const author = {
@@ -116,7 +112,6 @@ function extractFromHtml(html) {
         },
       };
 
-      // ---------- Video ----------
       const video = {
         id: item.id || null,
         canonicalUrl: null,
@@ -145,7 +140,6 @@ function extractFromHtml(html) {
         downloadUrl: null,
       };
 
-      // Canonical URL
       const canonical = pattern.canonicalParser ? pattern.canonicalParser(json) : null;
       if (canonical) {
         video.canonicalUrl = canonical;
@@ -153,7 +147,6 @@ function extractFromHtml(html) {
         video.canonicalUrl = `https://www.tiktok.com/@${a.uniqueId}/video/${video.id}`;
       }
 
-      // Qualities from bitrateInfo
       if (item.video?.bitrateInfo && item.video.bitrateInfo.length > 0) {
         for (const info of item.video.bitrateInfo) {
           const label = info.GearName || info.definition || info.QualityType || 'unknown';
@@ -168,7 +161,6 @@ function extractFromHtml(html) {
         }
       }
 
-      // Fallback to playAddr
       if (video.qualities.length === 0 && item.video?.playAddr) {
         video.qualities.push({
           label: 'default',
@@ -190,7 +182,7 @@ function extractFromHtml(html) {
   return null;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -219,7 +211,6 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // Validate all URLs
   for (const u of rawUrls) {
     if (!/^https?:\/\/(www\.)?(tiktok\.com|vt\.tiktok\.com)\//i.test(u)) {
       res.statusCode = 400;
@@ -230,10 +221,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    // Fetch all pages in parallel
     const htmls = await Promise.all(rawUrls.map(fetchUrl));
-
-    // Extract
     const extractions = htmls.map(extractFromHtml);
     if (extractions.some(e => !e)) {
       res.statusCode = 404;
@@ -242,7 +230,7 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    const author = extractions[0].author; // author taken from the first video
+    const author = extractions[0].author;
     const fetchedAt = new Date().toISOString();
     const video = extractions.map(e => ({ ...e.video, fetchedAt }));
 
@@ -255,4 +243,4 @@ module.exports = async function handler(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({ error: 'Failed to fetch TikTok data', details: error.message }));
   }
-};
+}
