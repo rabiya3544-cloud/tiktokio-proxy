@@ -3,15 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title></title>
+<title>JFR Video Downloader</title>
 <link href="tktokio.css" rel="stylesheet">
 </head>
 <body>
 <div class="wrap">
 <header>
+<div class="logo">
+<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" loading="lazy" alt="">
+</div>
 <div class="left">
-<h1>JFR Video Downloader</h1>
-<p class="eyebrow">A hight quality video downloader</p>
+<span class="title">JFR Video Downloader</span>
+<span class="eyebrow">A hight quality video downloader</span>
 </div>
 <div class="status-row right">
 <span class="dot" id="statusDot"></span>
@@ -21,8 +24,17 @@
 <main>
 <div class="panel">
 <div class="row">
-<label for="input" id="inputLabel">Tiktok Url</label>
-<input id="input" type="text" placeholder="https://www.tiktok.com/@user/video/1234567890" autocomplete="off" value="https://vt.tiktok.com/ZSgQfXgeA/">
+  <label for="input" id="inputLabel">Tiktok Url</label>
+  <div class="input-wrap">
+    <input id="input" type="text" placeholder="https://www.tiktok.com/@user/video/1234567890" autocomplete="off" value="https://vt.tiktok.com/ZSgQfXgeA/">
+    <button type="button" id="pasteBtn" class="paste-btn" aria-label="Paste from clipboard">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+        <path d="M5 15V6a2 2 0 0 1 2-2h9"></path>
+      </svg>
+      <span>Paste</span>
+    </button>
+  </div>
 </div>
 <button id="fetchBtn">Fetch</button>
 
@@ -36,7 +48,7 @@
 
 <div class="result-header">
 <div class="avatar">
-<img src="">
+<img class="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" loading="lazy" alt="">
 </div>
 <div class="handle">
 <div class="nickname">Jafer</div>
@@ -66,17 +78,23 @@
 <div id="tt-result" class="media-grid">
 <div class="media-card">
 <div class="media-preview">
-<img src="" loading="lazy" alt="#typ #varil #sidamatiktok #hawassatiktok">
+<div class="media-img">
+<img class="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" loading="lazy" alt="">
+</div>
 <div class="media-meta">
-<button type="button" class="media-download-btn hd" data-proxy-url="">Download HD</button>
-<button type="button" class="media-download-btn sd" data-proxy-url="">Download SD</button>
-<button type="button" class="media-download-btn watermark" data-proxy-url="">Download Watermark</button>
-<button type="button" class="media-download-btn mp3" data-proxy-url="">Download MP3</button>
+<a herf="" class="media-download-btn hd" download="">HD</a>
+<a herf="" class="media-download-btn sd" download="">SD</a>
+<a herf="" class="media-download-btn watermark" download="">Watermark</a>
+<a herf="" class="media-download-btn audio" download="">MP3</a>
+<span class="flex-1">
+<span id="engagement" class="">4.32%</span>
+</span>
+<button type="button" class="media-download-btn new">New</button>
 </div>
 </div>
 
 <div class="media-card-body">
-<div class="media-card-title">#typ #varil #sidamatiktok #hawassatiktok</div>
+<div class="media-card-title">#typ #varil #sidamatiktok #hawassatiktok #ethiopian-tiktok</div>
 <div class="media-download-status" style="display:none;"></div>
 </div>
 
@@ -111,12 +129,19 @@
 
 </div>
 </main>
-<footer>Powered by: <a href="" target="_blank">Jafer F.</a></footer>
+<footer>Powered by: <a href="db.html" target="_blank">Jafer F.</a></footer>
 </div>
-
-<script src="tktokio.js"></script>
 <!--
+<script src="tktokio.js"></script>
+-->
 <script type="module" src="app.js"></script>
+<!--
+<script type="module">
+  import { createTiktokClient } from './core.js';
+  const client = createTiktokClient();
+  const data = await client.process('https://vt.tiktok.com/ZSgQfXgeA');
+  console.log(data);
+</script>
 -->
 </body>
 </html>
